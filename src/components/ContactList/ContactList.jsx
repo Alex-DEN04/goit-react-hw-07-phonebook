@@ -10,9 +10,10 @@ export default function ContactList() {
   console.log(items);
   const dispatch = useDispatch();
   const filtered = useSelector(state => state.filter);
-  const normolizedFilter = filtered.toLowerCase();
+ 
+  // const normolizedFilter = filtered.toLowerCase();
   const filteredContacts = filtered
-    ? items.filter(({ name }) => name.toLowerCase().includes(normolizedFilter))
+    ? items.filter(({ name }) => name.toLowerCase().includes(filtered.toLowerCase()))
     : items;
 
   useEffect(() => {
