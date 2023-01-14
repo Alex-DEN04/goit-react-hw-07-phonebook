@@ -1,29 +1,96 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const contactInitialState = {
-  contacts: [],
+  contacts: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
   filter: '',
 };
 
 const contactsSlice = createSlice({
-  name: 'root',
+  name: 'phonebook',
   initialState: contactInitialState,
   reducers: {
-    addContact: (state, action) => {
-      state.contacts.unshift(action.payload);
+    fetchingInProgress(state) {
+      state.contacts.isLoading = true;
     },
-    deleteContact: (state, action) => {
-      const index = state.contacts.findIndex(
-        item => item.id === action.payload
-      );
-      state.contacts.splice(index, 1);
+    fetchingSuccess(state, action) {
+      state.contacts.isLoading = false;
+      state.contacts.error = null;
+      state.contacts.items = action.payload;
     },
-    filteredContacts: (state, action) => {
-      state.filter = action.payload;
+    fetchingError(state, action) {
+      state.contacts.isLoading = false;
+      state.contacts.error = action.payload;
+    },
+    postingInProgress(state) {
+      state.contacts.isLoading = true;
+    },
+    postingSuccess(state, action) {
+      state.contacts.isLoading = false;
+      state.contacts.error = null;
+      state.contacts.items.unshift(action.payload);
+    },
+    postingError(state, action) {
+      state.contacts.isLoading = false;
+      state.contacts.error = action.payload;
+    },
+    removeInProgress(state) {
+      state.contacts.isLoading = true;
+    },
+    removeSuccess(state, action) {
+      state.contacts.isLoading = false;
+      state.contacts.error = null;
+      state.contacts.items.unshift(action.payload);
+    },
+    removeError(state, action) {
+      state.contacts.isLoading = false;
+      state.contacts.error = action.payload;
     },
   },
 });
 
-export const { addContact, deleteContact, filteredContacts } =
-  contactsSlice.actions;
+// console.log(contactsSlice)
+
+export const {
+  fetchingInProgress,
+  fetchingSuccess,
+  fetchingError,
+  postingInProgress,
+  postingSuccess,
+  postingError,
+  removeInProgress,
+  removeSuccess,
+  removeError,
+} = contactsSlice.actions;
+// export const { addContact, deleteContact, filteredContacts } =
+//   contactsSlice.actions;
 export const myReduser = contactsSlice.reducer;
+
+// const tasksSlice = {
+//   name: "tasks",
+//   initialState: {
+//     items: [],
+//     isLoading: false,
+//     error: null,
+//   },
+//   reducers: {
+//     fetchingInProgress(state) {
+//       state.isLoading = true;
+//     },
+//     fetchingSuccess(state, action) {
+//       state.isLoading = false;
+//       state.error = null;
+//       state.items = action.payload;
+//     },
+//     fetchingError(state, action) {
+//       state.isLoading = false;
+//       state.error = action.payload;
+//     },
+//   },
+// };
+
+// export const { fetchingInProgress, fetchingSuccess, fetchingError } =
+//   tasksSlice.actions;
