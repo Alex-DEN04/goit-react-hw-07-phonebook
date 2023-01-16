@@ -43,7 +43,9 @@ const contactsSlice = createSlice({
     removeSuccess(state, action) {
       state.contacts.isLoading = false;
       state.contacts.error = null;
-      state.contacts.items.unshift(action.payload);
+      state.contacts.items = state.contacts.items.filter(
+        item => item.id !== action.payload
+      );
     },
     removeError(state, action) {
       state.contacts.isLoading = false;

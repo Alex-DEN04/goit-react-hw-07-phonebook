@@ -1,19 +1,20 @@
 import { Box } from 'components/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
 
+import { fetchContacts } from 'redux/operations';
 import Contact from '../Contact/Contact';
 
 export default function ContactList() {
-  const { items, isLoading, error } = useSelector(state => state.contacts);
-  console.log(items);
+  const { items, error } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
   const filtered = useSelector(state => state.filter);
- 
-  // const normolizedFilter = filtered.toLowerCase();
+
+  const normolizedFilter = filtered.toLowerCase();
   const filteredContacts = filtered
-    ? items.filter(({ name }) => name.toLowerCase().includes(filtered.toLowerCase()))
+    ? items.filter(({ name }) =>
+        name.toLowerCase().includes(filtered.toLowerCase(normolizedFilter))
+      )
     : items;
 
   useEffect(() => {
@@ -22,7 +23,6 @@ export default function ContactList() {
 
   return (
     <Box as="ul">
-      {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {items &&
         filteredContacts.map(contact => (

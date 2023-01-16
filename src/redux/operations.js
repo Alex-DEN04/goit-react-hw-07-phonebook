@@ -36,10 +36,10 @@ export const addContact = value => async dispatch => {
 export const deleteContact = id => async dispatch => {
   try {
     dispatch(removeInProgress());
-    const response = await axios.delete('/contacts', { ID: id });
-    console.log(id);
-    console.log(response);
-    dispatch(removeSuccess(response.data));
+    await axios.delete(`/contacts/${id}`);
+    // console.log(id);
+    // console.log(response);
+    dispatch(removeSuccess(id));
   } catch (e) {
     dispatch(removeError(e.message));
   }
