@@ -12,7 +12,6 @@ export default function Contact({ item }) {
       {item.name}: {item.phone}
       <Button type="button" onClick={() => dispatch(deleteContact(item.id))}>
         Delete
-        
       </Button>
     </Item>
   );

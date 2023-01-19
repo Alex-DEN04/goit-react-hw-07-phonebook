@@ -8,14 +8,22 @@ import Contact from '../Contact/Contact';
 export default function ContactList() {
   const { items, error } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
-  const filtered = useSelector(state => state.filter);
+  const filter = useSelector(state => state.filter);
 
-  const normolizedFilter = filtered.toLowerCase();
-  const filteredContacts = filtered
-    ? items.filter(({ name }) =>
-        name.toLowerCase().includes(filtered.toLowerCase(normolizedFilter))
-      )
-    : items;
+  const getFilterContacts = () => {
+    if (!filter) {
+      return items;
+    } 
+    const filteredContacts = items.filter(item => {
+      const normolizedFilter = filter.toLowerCase();
+      const normalizedName = item.name.toLowerCase();
+      const result = normalizedName.includes(normolizedFilter)
+    return result;
+    });
+    return filteredContacts;
+    
+  }
+  const contacts = getFilterContacts();
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -25,7 +33,7 @@ export default function ContactList() {
     <Box as="ul">
       {error && <p>{error}</p>}
       {items &&
-        filteredContacts.map(contact => (
+        contacts.map(contact => (
           <Contact key={contact.id} item={contact}></Contact>
         ))}
     </Box>
