@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/operations';
+import { addContact } from '../../redux/contacts/operations';
 
 import {
   FormStyled,

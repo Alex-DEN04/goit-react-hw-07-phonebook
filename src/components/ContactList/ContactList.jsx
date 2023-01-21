@@ -2,7 +2,7 @@ import { Box } from 'components/Box';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import { fetchContacts } from 'redux/operations';
+import { fetchContacts } from 'redux/contacts/operations';
 import Contact from '../Contact/Contact';
 
 export default function ContactList() {
@@ -13,16 +13,15 @@ export default function ContactList() {
   const getFilterContacts = () => {
     if (!filter) {
       return items;
-    } 
+    }
     const filteredContacts = items.filter(item => {
       const normolizedFilter = filter.toLowerCase();
       const normalizedName = item.name.toLowerCase();
-      const result = normalizedName.includes(normolizedFilter)
-    return result;
+      const result = normalizedName.includes(normolizedFilter);
+      return result;
     });
     return filteredContacts;
-    
-  }
+  };
   const contacts = getFilterContacts();
 
   useEffect(() => {
