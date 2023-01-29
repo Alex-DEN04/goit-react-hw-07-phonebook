@@ -13,9 +13,8 @@ export const Contact = ({ item }) => {
         Delete
       </Button>
     </>
-    
   );
-}
+};
 
 Contact.propTypes = {
   item: PropTypes.objectOf(PropTypes.string),

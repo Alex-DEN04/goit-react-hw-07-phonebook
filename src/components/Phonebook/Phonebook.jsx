@@ -61,9 +61,7 @@ export const ContactForm = () => {
         <Label>Number</Label>
         <Input type="tel" name="phone" />
         <FormError name="phone" />
-        <Button type="submit" >
-          Add contact
-        </Button>
+        <Button type="submit">Add contact</Button>
       </FormStyled>
     </Formik>
   );
