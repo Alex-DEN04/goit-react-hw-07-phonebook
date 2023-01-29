@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import { fetchContacts } from 'redux/contacts/operations';
-import Contact from '../Contact/Contact';
+import {Contact} from '../Contact/Contact';
+import { Item } from 'components/Contact/Contact.styled';
+import { getContacts, getError, getFilter } from 'redux/selectors';
 
 export default function ContactList() {
-  const { items, error } = useSelector(state => state.contacts);
+  const items = useSelector(getContacts)
+  const error = useSelector(getError)
+  const filter = useSelector(getFilter)
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.filter);
 
   const getFilterContacts = () => {
     if (!filter) {
@@ -30,10 +33,11 @@ export default function ContactList() {
 
   return (
     <Box as="ul">
-      {error && <p>{error}</p>}
-      {items &&
-        contacts.map(contact => (
-          <Contact key={contact.id} item={contact}></Contact>
+        {error && <p>{error}</p>}
+        {items && contacts.map(contact => (
+          <Item key={contact.id}>
+            <Contact item={contact}></Contact>
+          </Item>
         ))}
     </Box>
   );

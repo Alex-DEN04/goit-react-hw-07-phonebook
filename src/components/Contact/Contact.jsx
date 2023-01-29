@@ -2,18 +2,18 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import { deleteContact } from '../../redux/contacts/operations';
-import { Item, Button } from './Contact.styled';
-// import { MutatingDots } from  'react-loader-spinner'
+import { Button } from './Contact.styled';
 
-export default function Contact({ item }) {
+export const Contact = ({ item }) => {
   const dispatch = useDispatch();
   return (
-    <Item>
+    <>
       {item.name}: {item.phone}
       <Button type="button" onClick={() => dispatch(deleteContact(item.id))}>
         Delete
       </Button>
-    </Item>
+    </>
+    
   );
 }
 
