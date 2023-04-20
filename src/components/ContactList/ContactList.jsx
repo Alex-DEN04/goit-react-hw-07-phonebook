@@ -6,11 +6,13 @@ import { fetchContacts } from 'redux/contacts/operations';
 import { Contact } from '../Contact/Contact';
 import { Item } from 'components/Contact/Contact.styled';
 import { getContacts, getError, getFilter } from 'redux/selectors';
+// import { Loader } from 'components/Loader/Loader';
 
-export default function ContactList() {
+export const ContactList = () => {
   const items = useSelector(getContacts);
   const error = useSelector(getError);
   const filter = useSelector(getFilter);
+  // const loading = useSelector(getIsLoading);
   const dispatch = useDispatch();
 
   const getFilterContacts = () => {
@@ -33,7 +35,8 @@ export default function ContactList() {
 
   return (
     <Box as="ul">
-      {error && <p>{error}</p>}
+      {/* {loading && <Loader/> } */}
+      {error && <p>Something went wrong, please try again</p>}
       {items &&
         contacts.map(contact => (
           <Item key={contact.id}>

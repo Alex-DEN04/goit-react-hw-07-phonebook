@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/filter/filterActions';
 import { Label, Input } from './Filter.styled';
 
-export default function Filter() {
+export const Filter = () => {
   const dispatch = useDispatch();
   return (
     <Box ml={5} gap={3}>

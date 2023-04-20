@@ -1,21 +1,27 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { deleteContact } from '../../redux/contacts/operations';
+import { getIsLoading } from 'redux/selectors';
+import { deleteContact } from 'redux/contacts/operations';
 import { Button } from './Contact.styled';
+import { Loader } from 'components/Loader/Loader';
 
-export const Contact = ({ item }) => {
+export const Contact = ({ item: { id, name, phone } }) => {
+  const loading = useSelector(getIsLoading);
   const dispatch = useDispatch();
   return (
     <>
-      {item.name}: {item.phone}
-      <Button type="button" onClick={() => dispatch(deleteContact(item.id))}>
-        Delete
+      {name}: {phone}
+      <Button type="button" onClick={() => dispatch(deleteContact(id))}>
+        {loading ? <Loader/> : <span>Delete</span>}
       </Button>
     </>
   );
 };
 
 Contact.propTypes = {
-  item: PropTypes.objectOf(PropTypes.string),
+  id: PropTypes.string,
+  name: PropTypes.string,
+  phone: PropTypes.string,
 };
