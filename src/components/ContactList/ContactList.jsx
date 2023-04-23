@@ -4,15 +4,16 @@ import { useEffect } from 'react';
 
 import { fetchContacts } from 'redux/contacts/operations';
 import { Contact } from '../Contact/Contact';
-import { Item } from 'components/Contact/Contact.styled';
+import { Item } from './ContactListStyled';
 import { getContacts, getError, getFilter } from 'redux/selectors';
-// import { Loader } from 'components/Loader/Loader';
+import { Loader } from 'components/Loader/Loader';
+import { getIsLoading } from 'redux/selectors';
 
 export const ContactList = () => {
   const items = useSelector(getContacts);
   const error = useSelector(getError);
   const filter = useSelector(getFilter);
-  // const loading = useSelector(getIsLoading);
+  const loading = useSelector(getIsLoading);
   const dispatch = useDispatch();
 
   const getFilterContacts = () => {
@@ -35,7 +36,7 @@ export const ContactList = () => {
 
   return (
     <Box as="ul">
-      {/* {loading && <Loader/> } */}
+      {loading && <Loader />}
       {error && <p>Something went wrong, please try again</p>}
       {items &&
         contacts.map(contact => (
@@ -45,4 +46,4 @@ export const ContactList = () => {
         ))}
     </Box>
   );
-}
+};

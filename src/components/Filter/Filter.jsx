@@ -12,4 +12,4 @@ export const Filter = () => {
       <Input type="text" onChange={e => dispatch(setFilter(e.target.value))} />
     </Box>
   );
-}
+};

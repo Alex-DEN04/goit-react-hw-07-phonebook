@@ -15,7 +15,6 @@ import {
   Button,
 } from './ContactForm.styled';
 
-
 const FormError = ({ name }) => {
   return (
     <ErrorMessageStyled
@@ -38,14 +37,17 @@ const validationSchema = Yup.object().shape({
 export const ContactForm = () => {
   const items = useSelector(getContacts);
   const dispatch = useDispatch();
-  const handleSubmit = (values, {resetForm}) => {
+  const handleSubmit = (values, { resetForm }) => {
     values.id = nanoid();
     resetForm();
-    for (const item of items) {
-      if (item.name.toLowerCase() === values.name.toLowerCase()) {
-        return alert(`${values.name} is already in contacts`);
-      }
+
+    const existsName = items.some(
+      ({ name }) => name.toLowerCase() === values.name.toLowerCase()
+    );
+    if (existsName) {
+      return alert(`${values.name} is already in contacts`);
     }
+
     dispatch(addContact(values));
   };
 

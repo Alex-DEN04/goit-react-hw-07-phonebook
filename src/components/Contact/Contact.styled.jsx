@@ -1,17 +1,9 @@
 import styled from '@emotion/styled';
 
-export const Item = styled.li`
-  font-family: ${p => p.theme.fonts.body};
-  font-size: ${p => p.theme.fontSizes.m};
-  font-weight: ${p => p.theme.fontWeights.normal};
-  line-height: ${p => p.theme.lineHeights.body};
-  color: ${p => p.theme.colors.black};
-  padding: ${p => p.theme.space[0]}px;
-  margin: ${p => p.theme.space[0]}px;
-  list-style-type: none;
-`;
-
 export const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: ${p => p.theme.fonts.body};
   font-size: ${p => p.theme.fontSizes.s};
   font-weight: ${p => p.theme.fontWeights.bold};
@@ -23,5 +15,6 @@ export const Button = styled.button`
   border-color: transparent;
   border-radius: ${p => p.theme.space[2]}px;
   border: ${p => p.theme.space[0]}px;
-  width: auto;
+  width: ${p => p.theme.space[6]}px;
+  height: ${p => p.theme.space[5]}px;
 `;
